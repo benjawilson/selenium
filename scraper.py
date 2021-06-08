@@ -1,5 +1,5 @@
 import pandas as pd
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as bs 
 from selenium import webdriver
 
 driver = webdriver.Firefox(executable_path='/usr/bin/geckodriver')
@@ -17,11 +17,11 @@ content = driver.page_source
 # Load the contents of the page, its source, into BeautifulSoup
 # class, which analyzes the HTML as a nested data structure and allows
 # its elements by using various selctors.
-soup = BeautifulSoup(content)
+soup = bs(content, 'html.parser')
 # Change 'list-item' to 'title'.
-for element in soup.findAll(attrs={'class': 'title'}):
+for element in soup.findAll(attrs={'class': 'menu-item'}):
     name = element.find('a')
-# Add the ibject of "name" to the list "results".
+# Add the object of "name" to the list "results".
 # '<element>.text' extracts the text in the element, omitting the HTML tags.
     results.append(name.text)
 
